@@ -72,6 +72,16 @@
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
+        "env-map": {
+          "database-name": "SYMFONY_DATABASE_NAME",
+          "database-user": "SYMFONY_DATABASE_USER",
+          "database-host": "SYMFONY_DATABASE_HOST",
+          "database-password": "SYMFONY_DATABASE_USER"
         }
+
+
+      }
     }
+
+
 }
