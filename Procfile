@@ -1,1 +1,1 @@
-sudo apt-get install postgresql
+web: vendor/bin/heroku-php-apache2

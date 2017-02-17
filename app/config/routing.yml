@@ -4,3 +4,4 @@ user:
 app.index:
     resource: "@AppBundle/Controller/IndexController.php"
     type: annotation
+    
