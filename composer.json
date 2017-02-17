@@ -71,17 +71,13 @@
         "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        "env-map": {
-          "database-name": "SYMFONY_DATABASE_NAME",
-          "database-user": "SYMFONY_DATABASE_USER",
-          "database-host": "SYMFONY_DATABASE_HOST",
-          "database-password": "SYMFONY_DATABASE_USER"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+              "database_name": "SYMFONY_DATABASE_NAME",
+              "database_user": "SYMFONY_DATABASE_USER",
+              "database_host": "SYMFONY_DATABASE_HOST",
+              "database_password": "SYMFONY_DATABASE_PASSWORD"
+            }
         }
-
-
-      }
     }
-
-
 }
