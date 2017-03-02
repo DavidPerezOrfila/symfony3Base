@@ -4,7 +4,7 @@ fos_user:
     user_class: Trascastro\UserBundle\Entity\User
     registration:
         confirmation:
-            enabled: true
+            enabled: false
     from_email:
         address:        youremailaccount@gmail.com
         sender_name:    YourSenderName

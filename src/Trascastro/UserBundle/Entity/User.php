@@ -44,12 +44,20 @@ class User extends BaseUser
      */
     private $updatedAt;
 
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Post", mappedBy="author")
+     */
+    private $post;
+
+
     public function __construct()
     {
         parent::__construct();
 
         $this->createdAt    = new \DateTime();
         $this->updatedAt    = $this->createdAt;
+        $this->post = new ArrayCollection();
     }
 
     public function setCreatedAt()

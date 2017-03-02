@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block headTitle %}Articles{% endblock %}
+
+{% block body %}
+    {% for post in posts %}
+        <h1>{{ post.titulo }}</h1>
+        <div style="padding: 5px 20px">
+            <strong>Mensaje:</strong>
+            {% for msg in post.mensaje %}
+                {{ msg }},
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}
