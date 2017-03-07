@@ -11,12 +11,31 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Post;
 use AppBundle\Form\postType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class postController extends Controller
 {
+
+
     /**
-     * @Route("/", name="app_post_posts")
+     * @Route("/new", name="app_post_new")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function newAction(Request $request)
+    {
+        $a = new Post();
+        $form = $this->createForm(postType::class, $a);
+
+        return $this->render(':Post:AddPost.html.twig', [
+            'form' => $form->createView(),
+            'title' => 'New Post',
+        ]);
+    }
+
+    /**
+     * @Route("/post", name="app_post_posts")
      */
     public function postAction()
     {
@@ -29,16 +48,5 @@ class postController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/add-post", name="app_post_addPost")
-     */
-    public function addPostAction()
-    {
-        $a = new Post();
-        $form = $this->createForm(new postType(), $a, ['action' => $this->generateUrl('app_post_doAdd')]);
-        return $this->render(':Post:AddPost.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
 
 }
