@@ -18,9 +18,7 @@ class postType extends AbstractType
     {
         $builder
             ->add('titulo')
-            ->add('mensaje')
-            ->add('submit', 'submit')
-        ;
+            ->add('mensaje');
     }
 
     public function configureOptions(OptionsResolver $resolver)

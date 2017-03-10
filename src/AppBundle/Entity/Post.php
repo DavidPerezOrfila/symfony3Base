@@ -2,8 +2,8 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Post
@@ -31,6 +31,8 @@ class Post
     public function __construct()
     {
         $this->author = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = $this->createdAt;
     }
 
     /**
