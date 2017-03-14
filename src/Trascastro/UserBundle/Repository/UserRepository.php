@@ -23,7 +23,6 @@ class UserRepository extends EntityRepository
             ->andWhere('u.username = :username OR u.email = :username')
             ->setParameter('username', $username)
             ->getQuery()
-            ->getOneOrNullResult()
-            ;
+            ->getOneOrNullResult();
     }
 }

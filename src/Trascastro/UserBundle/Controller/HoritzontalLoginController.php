@@ -4,7 +4,6 @@ namespace Trascastro\UserBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Request;
 
 class HoritzontalLoginController extends Controller
 {

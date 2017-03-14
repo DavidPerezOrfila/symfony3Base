@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,11 +25,11 @@ class Post
      * Un usuario tiene muchos post.
      * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="post")
      */
-    private $author;
+    protected $author;
 
     public function __construct()
     {
-        $this->author = new ArrayCollection();
+
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
     }
@@ -156,5 +155,23 @@ class Post
     {
         return $this->updatedAt;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+
 }
 

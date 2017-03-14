@@ -61,11 +61,11 @@
         {% if datetime is not defined or not datetime -%}
             <div {{ block('widget_container_attributes') -}}>
         {%- endif %}
-            {{- date_pattern|replace({
-                '{{ year }}': form_widget(form.year),
-                '{{ month }}': form_widget(form.month),
-                '{{ day }}': form_widget(form.day),
-            })|raw -}}
+        {{- date_pattern|replace({
+            '{{ year }}': form_widget(form.year),
+            '{{ month }}': form_widget(form.month),
+            '{{ day }}': form_widget(form.day),
+        })|raw -}}
         {% if datetime is not defined or not datetime -%}
             </div>
         {%- endif -%}
@@ -170,7 +170,7 @@
             {% set label = name|humanize %}
         {% endif %}
         <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-            {{- widget|raw }} {{ label is not same as(false) ? (translation_domain is same as(false) ? label : label|trans({}, translation_domain)) -}}
+        {{- widget|raw }} {{ label is not same as(false) ? (translation_domain is same as(false) ? label : label|trans({}, translation_domain)) -}}
         </label>
     {% endif %}
 {% endblock checkbox_radio_label %}
@@ -229,12 +229,12 @@
 
 {% block form_errors -%}
     {% if errors|length > 0 -%}
-    {% if form.parent %}<span class="help-block">{% else %}<div class="alert alert-danger">{% endif %}
-    <ul class="list-unstyled">
+        {% if form.parent %}<span class="help-block">{% else %}<div class="alert alert-danger">{% endif %}
+        <ul class="list-unstyled">
         {%- for error in errors -%}
             <li><span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}</li>
         {%- endfor -%}
     </ul>
-    {% if form.parent %}</span>{% else %}</div>{% endif %}
+        {% if form.parent %}</span>{% else %}</div>{% endif %}
     {%- endif %}
 {%- endblock form_errors %}

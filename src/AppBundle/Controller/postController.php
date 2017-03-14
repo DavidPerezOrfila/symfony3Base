@@ -12,6 +12,7 @@ use AppBundle\Entity\Post;
 use AppBundle\Form\postType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -26,14 +27,6 @@ class postController extends Controller
     {
         $m = $this->getDoctrine()->getManager();
         $repo = $m->getRepository('AppBundle:Post');
-        /*$p = new tapas();
-        $p
-            ->setNazwa('Patatas Bravas')
-            ->setOpis('Deliciosas patatas con dos salsas picantes')
-            ->setCena('3')
-            ;
-        $m->persist($p);
-        $m->flush();*/
 
         $posts = $repo->findAll();
 
@@ -51,6 +44,7 @@ class postController extends Controller
     public function insertAction()
     {
         $post = new Post();
+        $post->setAuthor($this->getUser());
         $form = $this->createForm(PostType::class, $post);
         return $this->render(':Post:AddPost.html.twig',
             [
@@ -65,31 +59,36 @@ class postController extends Controller
      * @Route("/doInsert", name="app_post_doInsert")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_USER')")
      */
     public function doInsert(Request $request)
     {
-        $post = new Post();
-        $form = $this->createForm(postType::class, $post);
+        if ($this->isGranted('ROLE_USER')) {
+            $post = new Post();
+            $form = $this->createForm(postType::class, $post);
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $user = $this->getUser();
+                $post->setAuthor($user);
+                $m = $this->getDoctrine()->getManager();
 
-        $form->handleRequest($request);
+                $m->persist($post);
+                $m->flush();
+                $this->addFlash('messages', 'Post añadido');
+                return $this->redirectToRoute('app_index_index');
+            }
+            $this->addFlash('messages', 'Revisa los datos introducidos');
+            return $this->render(':Post:AddPost.html.twig',
+                [
+                    'form' => $form->createView(),
+                    'action' => $this->generateUrl('app_post_doInsert')
+                ]
 
-        if ($form->isValid()) {
-            $m = $this->getDoctrine()->getManager();
-
-            $m->persist($post);
-            $m->flush();
-            $this->addFlash('messages', 'Post añadido');
-            return $this->redirectToRoute('app_post_index');
+            );
         }
-        $this->addFlash('messages', 'Revisa tus datos');
-        return $this->render('Post/AddPost.html.twig',
-            [
-                'form' => $form->createView(),
-                'action' => $this->generateUrl('app_post_doInsert')
-            ]
-
-        );
+        return;
     }
+
 
     /**
      * @Route(path="/updatePost/{id}", name="app_post_update")
@@ -127,7 +126,7 @@ class postController extends Controller
         if ($form->isValid()) {
             $m->flush();
             $this->addFlash('messages', 'Post Actualizado');
-            return $this->redirectToRoute('app_product_index');
+            return $this->redirectToRoute('app_index_index');
         }
         $this->addFlash('messages', 'Revisa tu formulario');
         return $this->render(':Post:updPost.html.twig',
