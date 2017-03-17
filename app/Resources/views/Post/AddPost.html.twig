@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {{ form(form) }}
+    <form method="post" action="{{ path('app_post_doInsert') }}">
+        <button class="btn-default" type="submit" value="submit">Añadir</button>
+    </form>
+{% endblock %}
+
+{% block sidebar %}{% endblock %}

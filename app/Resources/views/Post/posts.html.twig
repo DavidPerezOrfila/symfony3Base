@@ -1,0 +1,55 @@
+{% extends "::base.html.twig" %} {% block title %}Lista de Mensajes{% endblock
+> %} {% block body %}
+    >
+    <section class="firstsection">
+        >
+        <div class="container">
+            > <h2>Posts</h2>
+            >
+            <table class="table  table-bordered">
+                >
+                <tr class="active">
+                    >
+                    <td class="text-bold">Titulo</td>
+                    >
+                    <td class="text-bold">Mensaje</td>
+                    >
+                    <td class="text-bold">created At</td>
+                    >
+                    <td class="text-bold">updatedAt</td>
+                    >
+                    <td class="text-bold">Accion</td>
+                    >
+                </tr>
+                > {% for post in posts %}
+                    >
+                    <tr>
+                        >
+                        <td>{{ post.titulo }}</td>
+                        >
+                        <td>{{ post.mensaje }}</td>
+                        >
+                        <td>{{ post.createdAt|date("m/d/Y") }}</td>
+                        >
+                        <td>{{ post.updatedAt|date("m/d/Y") }}</td>
+                        >
+                        <td>
+                            >
+                            <ul>
+                                >
+                                >
+                                <li><a href="{{ path('app_post_doUpdate', {'id': post.id}) }}">Editar</a></li>
+                                >
+                                >
+                            </ul>
+                            >
+                        </td>
+                        >
+                    </tr>
+                    >                 {% endfor %}
+                >
+            </table>
+            >
+        </div>
+        >
+    </section> {% endblock %}

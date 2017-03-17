@@ -1,0 +1,12 @@
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+
+app.index:
+    resource: "@AppBundle/Controller/IndexController.php"
+    type: annotation
+post:
+    resource: "@AppBundle/Controller/postController.php"
+    type: annotation
+    prefix: /post
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
